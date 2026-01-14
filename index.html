@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kokomo - PM Discovery, Simplified</title>
+    <meta name="description" content="Stop spending 4 hours synthesizing stakeholder interviews. Kokomo transforms discovery transcripts into clear, actionable insights in minutes.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,600&family=Albert+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-sand: #FFF8F0;
+            --color-teal: #0D9488;
+            --color-teal-dark: #0F766E;
+            --color-coral: #FF6B6B;
+            --color-navy: #1E293B;
+            --color-gray: #64748B;
+            --color-light-gray: #F1F5F9;
+            
+            --font-display: 'Fraunces', serif;
+            --font-body: 'Albert Sans', sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--color-navy);
+            background: var(--color-sand);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: rgba(255, 248, 240, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(13, 148, 136, 0.1);
+        }
+        
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            font-style: italic;
+            color: var(--color-teal);
+            text-decoration: none;
+        }
+        
+        .nav-cta {
+            background: var(--color-teal);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--color-teal);
+        }
+        
+        .nav-cta:hover {
+            background: var(--color-teal-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(13, 148, 136, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--color-navy);
+        }
+        
+        .hero h1 .highlight {
+            color: var(--color-teal);
+            font-style: italic;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--color-gray);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+        
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: 2px solid transparent;
+        }
+        
+        .btn-primary {
+            background: var(--color-teal);
+            color: white;
+            border-color: var(--color-teal);
+        }
+        
+        .btn-primary:hover {
+            background: var(--color-teal-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(13, 148, 136, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-navy);
+            border-color: var(--color-navy);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--color-navy);
+            color: white;
+        }
+        
+        .social-proof {
+            font-size: 0.9rem;
+            color: var(--color-gray);
+            opacity: 0.8;
+        }
+        
+        /* Problem Section */
+        .problem {
+            background: white;
+            padding: 5rem 2rem;
+            position: relative;
+        }
+        
+        .problem::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-teal), transparent);
+        }
+        
+        .section-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .section-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-teal);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+        
+        .pain-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .pain-point {
+            background: var(--color-light-gray);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--color-coral);
+            transition: transform 0.3s ease;
+        }
+        
+        .pain-point:hover {
+            transform: translateX(8px);
+        }
+        
+        .pain-point h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-navy);
+        }
+        
+        .pain-point p {
+            color: var(--color-gray);
+            font-size: 0.95rem;
+        }
+        
+        /* Solution Section */
+        .solution {
+            background: var(--color-sand);
+            padding: 5rem 2rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .feature {
+            text-align: center;
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+        
+        .feature:nth-child(1) { animation-delay: 0.1s; }
+        .feature:nth-child(2) { animation-delay: 0.2s; }
+        .feature:nth-child(3) { animation-delay: 0.3s; }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--color-teal);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            transform: rotate(-5deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover .feature-icon {
+            transform: rotate(0deg) scale(1.1);
+        }
+        
+        .feature h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-navy);
+        }
+        
+        .feature p {
+            color: var(--color-gray);
+            line-height: 1.7;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            background: white;
+            padding: 5rem 2rem;
+        }
+        
+        .steps {
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+        
+        .step {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            align-items: start;
+        }
+        
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--color-teal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-navy);
+        }
+        
+        .step-content p {
+            color: var(--color-gray);
+            line-height: 1.7;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-teal-dark) 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .cta-section h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .cta-section p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            position: relative;
+        }
+        
+        .cta-section .btn-primary {
+            background: white;
+            color: var(--color-teal);
+            border-color: white;
+        }
+        
+        .cta-section .btn-primary:hover {
+            background: var(--color-sand);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--color-navy);
+            color: white;
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+        }
+        
+        footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        footer a {
+            color: var(--color-teal);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+            
+            .hero {
+                padding: 3rem 1.5rem 2rem;
+            }
+            
+            .cta-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .step {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo">Kokomo</a>
+        <a href="#waitlist" class="nav-cta">Join Waitlist</a>
+    </nav>
+
+    <section class="hero">
+        <h1>PM Discovery,<br><span class="highlight">Simplified</span></h1>
+        <p>Stop spending 4 hours synthesizing stakeholder interviews. Transform discovery transcripts into clear, actionable insights in minutes.</p>
+        
+        <div class="cta-group">
+            <a href="#waitlist" class="btn btn-primary">Join Waitlist</a>
+            <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+        </div>
+        
+        <p class="social-proof">Built by PMs, for PMs</p>
+    </section>
+
+    <section class="problem">
+        <div class="section-content">
+            <p class="section-label">The Problem</p>
+            <h2 class="section-title">Discovery synthesis is killing your velocity</h2>
+            <p style="font-size: 1.1rem; color: var(--color-gray); margin-bottom: 2rem;">
+                You're doing discovery the right way—talking to stakeholders, recording conversations, gathering insights. But the manual work after? That's where time goes to die.
+            </p>
+            
+            <div class="pain-points">
+                <div class="pain-point">
+                    <h3>⏰ 3-4 hours wasted</h3>
+                    <p>Copy-pasting transcripts, writing prompts, reformatting summaries, compiling everything into a report.</p>
+                </div>
+                <div class="pain-point">
+                    <h3>😰 Low confidence</h3>
+                    <p>Did you capture the patterns? Miss contradictions? Are you creating the right insights?</p>
+                </div>
+                <div class="pain-point">
+                    <h3>📝 Noisy outputs</h3>
+                    <p>Generic AI tools give you duplicative fluff. You spend more time trimming than synthesizing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="solution">
+        <div class="section-content">
+            <p class="section-label">The Solution</p>
+            <h2 class="section-title">Your discovery workflow, automated</h2>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <h3>Multi-Transcript Synthesis</h3>
+                    <p>Upload 5-10 stakeholder conversations. Get back a complete synthesis report with patterns, contradictions, and supporting quotes.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✨</div>
+                    <h3>Zero Noise, Pure Signal</h3>
+                    <p>Each insight appears once, clearly. No duplication. No fluff. Just fact-based insights with evidence from your conversations.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>3+ Hours Back</h3>
+                    <p>What used to take half a day now takes 30 minutes. Copy-paste ready for Linear, Notion, or downloadable as a shareable artifact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-content">
+            <p class="section-label">How It Works</p>
+            <h2 class="section-title">Three steps to clarity</h2>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Upload Your Transcripts</h3>
+                        <p>Drop in your stakeholder interview transcripts from Otter, Fireflies, or any recording tool. Kokomo handles the rest.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>AI Synthesizes Insights</h3>
+                        <p>Kokomo analyzes all conversations together—finding patterns, flagging contradictions, pulling quotes, and organizing insights by impact.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Share Your Report</h3>
+                        <p>Get a clean, professional synthesis report. Copy-paste to Linear or download as an artifact to share with stakeholders.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="waitlist">
+        <h2>Ready to speed up discovery?</h2>
+        <p>Join the waitlist and be first to try Kokomo</p>
+        
+        <!-- Replace this with your actual email signup form -->
+        <form style="max-width: 500px; margin: 0 auto; position: relative;">
+            <input 
+                type="email" 
+                placeholder="Enter your email" 
+                required
+                style="width: 100%; padding: 1rem 1.5rem; border-radius: 50px; border: none; font-size: 1rem; margin-bottom: 1rem;"
+            >
+            <button 
+                type="submit" 
+                class="btn btn-primary"
+                style="width: 100%; cursor: pointer; border: 2px solid white;"
+            >
+                Join Waitlist
+            </button>
+        </form>
+        
+        <p style="font-size: 0.9rem; margin-top: 1.5rem; opacity: 0.8;">
+            No spam, just updates when we launch. Unsubscribe anytime.
+        </p>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Kokomo. Built with care for Product Managers.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="mailto:hello@getkokomo.com">hello@getkokomo.com</a>
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Simple form handling (replace with your actual signup service)
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            alert('Thanks for joining! We\'ll email you at: ' + email);
+            // Replace this with actual signup logic (Mailchimp, ConvertKit, etc.)
+        });
+    </script>
+</body>
+</html>
